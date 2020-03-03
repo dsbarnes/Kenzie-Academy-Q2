@@ -1,0 +1,62 @@
+openapi: "3.0.1"
+info:
+  description: "This is a sample server for Kenziegram"
+  version: "1.0.0"
+  title: "Swagger Kenziegram"
+
+tags:
+- name: "api"
+  description: "Stuff you can do with the API"
+paths:
+  /api/images:
+    get:
+      tags:
+        - "api"
+      summary: "request a users image"
+      responses:
+        200:
+          description: 'OK'
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageURI:
+                    type: string
+                  statusCode:
+                    type: integer
+        400:
+          description: "Ya broke it."
+    
+    post:
+      tags:
+      - "api"
+      summary: "upload an image"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                picture:
+                  type: string
+                  format: binary
+              required:
+                - picture
+        description: ""
+        required: true
+        
+      responses:
+        200:
+          description: "OK!"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageURI:
+                    type: string
+                  statusCode:
+                    type: integer
+        400:
+          description: "That did not work"
